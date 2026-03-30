@@ -1,10 +1,13 @@
+---
+import '../styles/global.css';
+---
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mi Pagina Web</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -22,7 +25,7 @@
     <section id="inicio" class="hero">
         <h1>Bienvenido a mi pagina</h1>
         <p>Esta es la pagina principal de mi sitio web. Aqui vas a encontrar informacion sobre lo que hacemos.</p>
-        <button onclick="mostrarMensaje()">Haz click aqui</button>
+        <button id="btn-hero">Haz click aqui</button>
     </section>
 
     <!-- seccion servicios -->
@@ -48,19 +51,19 @@
     <section id="preguntas" style="padding:50px 20px; max-width:700px; margin:auto;">
         <h2>Preguntas frecuentes</h2>
         <div class="item-acordeon">
-            <button class="btn-acordeon" onclick="toggleAcordeon(this)">¿Que hacemos?</button>
+            <button class="btn-acordeon">¿Que hacemos?</button>
             <div class="contenido-acordeon">
                 <p>Hacemos muchas cosas relacionadas con tecnologia y desarrollo web.</p>
             </div>
         </div>
         <div class="item-acordeon">
-            <button class="btn-acordeon" onclick="toggleAcordeon(this)">¿Como contactarnos?</button>
+            <button class="btn-acordeon">¿Como contactarnos?</button>
             <div class="contenido-acordeon">
                 <p>Podes contactarnos por email o por el formulario de abajo.</p>
             </div>
         </div>
         <div class="item-acordeon">
-            <button class="btn-acordeon" onclick="toggleAcordeon(this)">¿Cuanto cuesta?</button>
+            <button class="btn-acordeon">¿Cuanto cuesta?</button>
             <div class="contenido-acordeon">
                 <p>Los precios varian segun el proyecto. Consultanos sin compromiso.</p>
             </div>
@@ -70,10 +73,10 @@
     <!-- seccion contacto -->
     <section id="contacto" class="contacto">
         <h2>Contacto</h2>
-        <form onsubmit="enviarFormulario(event)">
-            <input type="text" id="nombre" placeholder="Tu nombre" /><br><br>
-            <input type="email" id="email" placeholder="Tu email" /><br><br>
-            <textarea id="mensaje" placeholder="Tu mensaje" rows="4"></textarea><br><br>
+        <form id="form-contacto">
+            <input type="text" id="nombre" placeholder="Tu nombre" /><br /><br />
+            <input type="email" id="email" placeholder="Tu email" /><br /><br />
+            <textarea id="mensaje" placeholder="Tu mensaje" rows="4"></textarea><br /><br />
             <button type="submit">Enviar</button>
         </form>
         <p id="respuesta-form"></p>
@@ -83,6 +86,41 @@
         © 2024 MiSitio. Todos los derechos reservados.
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
+
+<script>
+    // boton hero
+    document.getElementById('btn-hero')?.addEventListener('click', () => {
+        alert('Gracias por visitar nuestra pagina!');
+    });
+
+    // acordeon
+    document.querySelectorAll('.btn-acordeon').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const contenido = btn.nextElementSibling as HTMLElement;
+            contenido.style.display = contenido.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+
+    // formulario contacto
+    document.getElementById('form-contacto')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nombre  = (document.getElementById('nombre')  as HTMLInputElement).value;
+        const email   = (document.getElementById('email')   as HTMLInputElement).value;
+        const mensaje = (document.getElementById('mensaje') as HTMLTextAreaElement).value;
+
+        if (!nombre || !email || !mensaje) {
+            alert('Por favor completa todos los campos');
+            return;
+        }
+
+        (document.getElementById('respuesta-form') as HTMLElement).innerText =
+            `Mensaje enviado correctamente. Te contactaremos pronto, ${nombre}!`;
+
+        (document.getElementById('nombre')  as HTMLInputElement).value = '';
+        (document.getElementById('email')   as HTMLInputElement).value = '';
+        (document.getElementById('mensaje') as HTMLTextAreaElement).value = '';
+    });
+</script>

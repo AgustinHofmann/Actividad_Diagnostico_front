@@ -1,13 +1,18 @@
 # Actividad Diagnostico Front
 
-Pagina web estatica con HTML, CSS y JavaScript. Tiene una seccion de inicio, servicios, preguntas frecuentes y contacto.
+Pagina web con secciones de inicio, servicios, preguntas frecuentes y contacto. Migrada a Astro como framework frontend.
 
 ## Herramientas
 
-- HTML5
+- Astro
 - CSS3
-- JavaScript (vanilla)
+- JavaScript / TypeScript
 
 ## Como ejecutarlo
 
-Abrir el archivo `index.html` directamente en el navegador. No requiere instalacion ni servidor.
+```bash
+npm install
+npm run dev
+```
+
+Abrir en el navegador: http://localhost:4321
